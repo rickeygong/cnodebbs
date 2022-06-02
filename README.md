@@ -1,2 +1,4 @@
-# CNODE-BBS-Demo
-CNODE BBS Demo
+# CNODE-BBS
+## 版本
+## 收获
+## 笔记
