@@ -11,7 +11,10 @@
       >
     </div>
     <!-- 帖子列表 -->
-    <div class="posts">
+    <div
+      class="posts"
+      v-else
+    >
       <ul>
         <li>
           <div class="toobar">
@@ -42,13 +45,19 @@
             topiclist_tab: (post.googd != true && post.top != true)
 
           }]">
-            {{ post | tabFormatter }}
-            <!-- <span>
+            <!-- {{ post | tabFormatter }} -->
+            <span>
               {{ post | tabFormatter }}
-            </span> -->
+            </span>
           </span>
           <!-- 标题 -->
-          <span>{{ post.title }}</span>
+          <router-link :to="{
+            name: 'post_content',
+            params: { id: post.id }
+          }">
+            <span>{{ post.title }}</span>
+          </router-link>
+
           <!-- 最后回复时间 -->
           <span class="last_reply">{{ post.last_reply_at | formatDate }}</span>
 

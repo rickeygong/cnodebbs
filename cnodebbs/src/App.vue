@@ -2,7 +2,8 @@
   <div id="app">
     <Header></Header>
     <div class="main">
-      <PostList></PostList>
+      <!-- router- -->
+      <router-view name="main"></router-view>
     </div>
 
   </div>
@@ -20,7 +21,7 @@ export default {
 }
 </script >
 
-<style >
+<style>
 .main {
   width: 80%;
   margin: 0 auto;
