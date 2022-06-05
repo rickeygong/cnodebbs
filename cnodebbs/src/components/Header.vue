@@ -1,11 +1,13 @@
 <template>
   <!-- template下面必须有且仅有一个根节点 -->
   <div class="header">
-    <img
-      src="../assets/cnodejs_light.svg"
-      alt=""
-      srcset=""
-    >
+    <router-link :to="{ name: 'root' }">
+      <img
+        src="../assets/cnodejs_light.svg"
+        alt=""
+        srcset=""
+      >
+    </router-link>
     <ul>
       <li><a href="#">首页</a></li>
       <li><a href="#">新手入门</a></li>

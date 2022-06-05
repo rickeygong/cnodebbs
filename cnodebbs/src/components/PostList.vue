@@ -53,7 +53,7 @@
           <!-- 标题 -->
           <router-link :to="{
             name: 'post_content',
-            params: { id: post.id }
+            params: { id: post.id, name: post.author.loginname }
           }">
             <span>{{ post.title }}</span>
           </router-link>
@@ -63,18 +63,26 @@
 
         </li>
         <!-- 每一行的帖子 结束 -->
+
+        <!-- 分页 开始 -->
+        <li>
+          <!-- 子组件给父组件传递数据①： @handleList="renderList() ，然后定义renderList方法-->
+          <pagination @handleList="renderList"></pagination>
+        </li>
+        <!-- 分页 结束 -->
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import pagination from "./Pagination";
 export default {
   props: {
 
   },
   components: {
-
+    pagination
   },
   data() {
     return {
@@ -87,7 +95,7 @@ export default {
       this.$http.get('https://cnodejs.org/api/v1/topics',
         {
           params: {
-            page: 1,
+            page: this.postpage,
             limit: 20
           }
         })
@@ -96,6 +104,10 @@ export default {
           this.posts = res.data.data
         })
         .catch(function (err) { console.log(err) })
+    },
+    renderList(value) {
+      this.postpage = value;
+      this.getData()
     }
   },
   beforeMount() {

@@ -3,6 +3,7 @@
     <Header></Header>
     <div class="main">
       <!-- router- -->
+      <router-view name="slidebar"></router-view>
       <router-view name="main"></router-view>
     </div>
 

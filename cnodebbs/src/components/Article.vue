@@ -27,13 +27,45 @@
         class="topic_content"
         v-html="post.content"
       ></div>
-      <div>
-        <div class="topbar">回复</div>
+      <div id="reply">
+        <div class="topbar">{{ post.replies.length }} 回复</div>
         <!-- 回复的列表 -->
-        <div v-for="(reply, index) in post.replies">
-          <!-- 头像 -->
-          <!-- 用户名称 -->
+        <div
+          class="replySec"
+          v-for="(reply, index) in post.replies"
+        >
+          <div class="replyUp">
+            <!-- 头像 -->
+            <router-link :to="{
+              name: 'user_info', params: {
+                name: reply.author.loginname
+              }
+            }">
+              <img
+                :src="reply.author.avatar_url"
+                alt=""
+              >
+            </router-link>
+
+            <router-link :to="{
+              name: 'user_info', params: {
+                name: reply.author.loginname
+              }
+            }">
+              <!-- 用户名称 -->
+              <span>{{ reply.author.loginname }}</span>
+            </router-link>
+            <!-- 楼层 -->
+            <span>
+              {{ index + 1 }}楼
+            </span>
+            <span v-if="reply.ups.length > 0">
+              ☝ {{ reply.ups.length }}
+            </span>
+            <span v-else></span>
+          </div>
           <!-- 回复内容 -->
+          <p v-html="reply.content"></p>
         </div>
       </div>
     </div>
@@ -71,6 +103,12 @@ export default {
   beforeMount() {
     this.isloading = true;
     this.getArtcleData();
+  },
+  //检测路由变化
+  watch: {
+    '$route'(to, from) {
+      this.getArtcleData()
+    }
   }
 }
 </script>
